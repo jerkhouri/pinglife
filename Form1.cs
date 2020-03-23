@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,9 +14,10 @@ namespace pinglife
 {
     public partial class Form1 : Form
     {
-        public static string url = "8.8.8.8";
-        public static Boolean error = false;
-        public static Boolean highping = false;
+        string url = "8.8.8.8";
+        Boolean error = false;
+        Boolean highping = false;
+        int timeoff = 0;
 
         public Form1()
         {
@@ -95,6 +96,18 @@ namespace pinglife
                         ShowText("X", new Font("Arial", 10), Color.Red);
                         notifyIcon1.Text = "Unable to reach \"" + url + "\"";
                     }
+                }
+                else
+                {
+                    if(timeoff == 5)
+                    {
+                        timeoff = 0;
+                        error = false;
+                    }
+                    else
+                    {
+                        timeoff += 1;
+                    }                   
                 }
 
             }
